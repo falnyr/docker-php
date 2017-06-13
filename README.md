@@ -25,14 +25,12 @@ These images contain the following additions to the vanilla PHP images:
 
 ## Pull images
 
-The images are stored on [Docker Hub](https://hub.docker.com/r/falnyr/php-ci/). Use `docker pull falnyr/php-ci` to pull these images.
+The images are stored on [Docker Hub](https://hub.docker.com/r/falnyr/php-fpm/). Use `docker pull falnyr/php-fpm` to pull these images.
 
 The following tags are available:
 
 * 7.0
-* 7.0-no-xdebug
 * 7.1
-* 7.1-no-xdebug
 
 ## Build process
 
