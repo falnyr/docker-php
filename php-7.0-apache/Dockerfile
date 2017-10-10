@@ -48,6 +48,13 @@ RUN pecl install xdebug \
 
 RUN echo "extension=ds.so" >> /usr/local/etc/php/php.ini
 
+# geoip
+RUN runtimeRequirements="libgeoip-dev" \
+	&& apt-get update && apt-get install -y ${runtimeRequirements} \
+	&& pecl install geoip-1.1.1 \
+	&& echo "extension=geoip.so" > /usr/local/etc/php/conf.d/ext-geoip.ini \
+	&& rm -rf /var/lib/apt/lists/*
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN a2enmod rewrite
