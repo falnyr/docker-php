@@ -19,7 +19,7 @@ RUN apt-get install -y \
   libgd-dev \
   libfreetype6-dev \
   libgmp-dev \
-  mysql
+  mysql-client
 
 RUN apt-get clean
 
