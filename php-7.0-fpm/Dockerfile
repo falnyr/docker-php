@@ -18,7 +18,8 @@ RUN apt-get install -y \
   libpcre3-dev \
   libgd-dev \
   libfreetype6-dev \
-  libgmp-dev
+  libgmp-dev \
+  mysql
 
 RUN apt-get clean
 
