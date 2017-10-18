@@ -19,7 +19,8 @@ RUN apt-get install -y \
   libgd-dev \
   libfreetype6-dev \
   libgmp-dev \
-  mysql-client
+  mysql-client \
+  calendar
 
 RUN apt-get clean
 
