@@ -49,7 +49,7 @@ RUN pecl install xdebug \
   && { \
      		echo "xdebug.remote_enable=On"; \
      		echo "xdebug.remote_connect_back=On"; \
-     	} | tee -a /usr/local/etc/php/conf.d/ext-geoip.ini
+     	} | tee -a /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 RUN pecl install geoip-1.1.1 \
 	&& echo "extension=geoip.so" > /usr/local/etc/php/conf.d/ext-geoip.ini
