@@ -54,6 +54,7 @@ RUN pecl install xdebug \
 RUN pecl install geoip-1.1.1 \
 	&& echo "extension=geoip.so" > /usr/local/etc/php/conf.d/ext-geoip.ini
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN pecl install gender \
+    && docker-php-ext-enable gender
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

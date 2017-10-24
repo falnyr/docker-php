@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.2-rc-apache
 
 RUN apt-get update
 

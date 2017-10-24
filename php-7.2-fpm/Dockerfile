@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.2-rc-fpm
 
 RUN apt-get update
 
@@ -58,6 +58,3 @@ RUN pecl install gender \
     && docker-php-ext-enable gender
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN a2enmod rewrite
-RUN usermod -u 1000 www-data
