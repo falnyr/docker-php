@@ -1,25 +1,37 @@
 FROM php:7.1-apache
 
-RUN apt-get update
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libicu-dev \
+    g++ \
+    libssl-dev \
+    apt-transport-https
 
-RUN apt-get install -y \
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/8/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+    && apt-get update
+
+RUN ACCEPT_EULA=Y apt-get install -y \
   libcurl4-openssl-dev \
   sudo \
   git \
   vim \
   libxslt-dev \
-  zlib1g-dev \
   graphviz \
   zip \
   libmcrypt-dev \
-  libicu-dev \
-  g++ \
   libpcre3-dev \
   libgd-dev \
   libfreetype6-dev \
   libgmp-dev \
   mysql-client \
-  libgeoip-dev
+  libgeoip-dev \
+  unixodbc \
+  unixodbc-dev \
+  odbcinst \
+  msodbcsql \
+  locales \
+    && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
 
 RUN apt-get clean
 
@@ -56,6 +68,10 @@ RUN pecl install geoip-1.1.1 \
 
 RUN pecl install gender \
     && docker-php-ext-enable gender
+
+RUN pecl install pdo_sqlsrv && \
+    echo -e "extension=pdo_sqlsrv.so" > /usr/local/etc/php/conf.d/ext-pdosqlsrv.ini && \
+    docker-php-ext-enable pdo_sqlsrv
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
