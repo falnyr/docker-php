@@ -83,7 +83,7 @@ RUN usermod -u 1000 www-data
 RUN wget -O - https://packagecloud.io/gpg.key | sudo apt-key add -
 RUN echo "deb http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list
 RUN apt-get update
-RUN apt-get install blackfire-agent blackfire-php
+RUN apt-get install -y blackfire-agent blackfire-php
 
 COPY "start.sh" "/tmp/start.sh"
 
