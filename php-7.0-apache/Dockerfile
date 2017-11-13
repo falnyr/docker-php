@@ -31,6 +31,8 @@ RUN ACCEPT_EULA=Y apt-get install -y \
   odbcinst \
   msodbcsql \
   locales \
+  imagemagick \
+  wget \
     && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
 
 RUN apt-get clean
@@ -77,3 +79,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN a2enmod rewrite
 RUN usermod -u 1000 www-data
+
+RUN wget -O - https://packagecloud.io/gpg.key | sudo apt-key add -
+RUN echo "deb http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list
+RUN apt-get update
+RUN apt-get install blackfire-agent blackfire-php
+
+COPY "start.sh" "/tmp/start.sh"
+
+CMD /tmp/start.sh ; apache2-foreground
