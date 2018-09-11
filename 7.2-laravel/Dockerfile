@@ -1,14 +1,13 @@
-FROM falnyr/php:7.2-apache
+FROM falnyr/php:7.2
 
-RUN apt-get update
+RUN addgroup -S app && adduser -S -G app app
 
-RUN apt-get install -y \
-    libcurl4-openssl-dev \
+RUN apk add zlib-dev \
     libxslt-dev \
-    zlib1g-dev \
-    libzip-dev \
-    libicu-dev \
-    libgd-dev
+    curl-dev \
+    icu-dev \
+    libjpeg-turbo-dev \
+    libpng-dev
 
 RUN docker-php-ext-install zip \
     && docker-php-ext-install xsl \
@@ -20,4 +19,5 @@ RUN docker-php-ext-install zip \
     && docker-php-ext-install opcache \
     && docker-php-ext-install gd
 
-COPY ./site.conf /etc/apache2/sites-enabled/site.conf
+RUN mkdir -p /app/
+WORKDIR /app/
